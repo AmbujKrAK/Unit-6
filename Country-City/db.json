@@ -1,0 +1,49 @@
+{
+  "country": [
+    "India",
+    "ShriLanka",
+    "USA",
+    "Brazil",
+    "England",
+    "Italy",
+    "pakistan"
+  ],
+  "city": [
+    {
+      "id": 1,
+      "country": "India",
+      "city": "Delhi",
+      "population": "100000"
+    },
+    {
+      "id": 2,
+      "country": "ShriLanka",
+      "city": "Colombia",
+      "population": "59000000"
+    },
+    {
+      "id": 3,
+      "country": "USA",
+      "city": "London",
+      "population": 26000000
+    },
+    {
+      "id": 4,
+      "country": "Brazil",
+      "city": "Manus",
+      "population": "80078600"
+    },
+    {
+      "id": 5,
+      "country": "Italy",
+      "city": "Milan",
+      "population": "59000000"
+    },
+    {
+      "country": "Jerman",
+      "city": "Mosco",
+      "population": "20890570",
+      "id": 6
+    }
+  ]
+}
