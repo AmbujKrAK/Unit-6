@@ -1,18 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const EmployeesController = require("./controllers/emplyeeController"); 
-
-
-var username = "Ambuj123";
-var pass = "Ambuj123";
-let database = "";
-
-
-const connect = () => {
-    mongoose.connect(`mongodb+srv://${username}:${pass}@cluster0.xn7wc.mongodb.net/${database}?retryWrites=true&w=majority`)
-}
-
+const connect = require('./src/config/db');
 
 app.listen(5000, async ()=> {
     try {
