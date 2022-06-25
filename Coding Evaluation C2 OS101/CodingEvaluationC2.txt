@@ -1,0 +1,153 @@
+Q1 a) What do you know about client server architecture?
+
+Ans 1(a) 
+
+Client-server architecture, alternatively called a client-server model, is a network application that breaks down tasks and workloads between clients and servers that reside on the same system or are linked by a computer network.
+
+Client-server architecture typically features multiple users’ workstations, PCs, or other devices, connected to a central server via an Internet connection or other network. The client sends a request for data, and the server accepts and accommodates the request, sending the data packets back to the user who needs them.
+
+This model is also called a client-server network or a network computing model.
+
+Few Examples of Client Server Architecture where it is used in real-life are - 
+    1. Email servers
+    2. File servers
+    3. Web servers
+
+<--------------------------------------------------------------------------------------------------------------------------------->
+
+Q1 b) What is the difference between DNS and IP address?
+
+Ans 1(b)
+
+IP or the Internet Protocol serves two purposes: defining the rules for the IP addressing system for giving a logical numerical address to each entity in a TCP/IP based network and the routing or transporting data packets from source hosts to destination hosts. Whereas DNS or the Domain Naming System is a hierarchical system for naming computers or other resources connected to a network. It facilitates the naming of groups of users and resources, disregarding their physical locations, which simplifies things for general users, as they only have to know a URL or an E-mail address to access hosts or resources without worrying about how physically locate them.
+
+IP addressing is of vital importance, as it is how the location of an entity or a host (such as a computer or a printer), is recognized in an IP based network. However, A typical domain name, (which is formed according to the rules in DNS protocol) consists of three or more parts (referred to as labels), usually concatenated by dots.
+
+An IP address is usually a unique 32-bit (IPv4) or 128-bit (IPv6) binary number that is assigned to an entity of a network, by the Internet Assigned Number Authority. For the convenience of the human users, these IP addresses are stored in the format of a decimal number. Whereas, If any domain name is associated with a certain IP address, those names are referred to as Hostnames. For example, www.differencebetween.com and differencebetween.com are  hostnames, while the TLDs such as .com or .org are not, as they are not associated with any IP address.
+
+<-------------------------------------------------------------------------------------------------------------------------------->
+
+
+Q2. What is CAP theorem, discuss a scenario where CAP theorem helps you choose a technology over the other or helps you make a design decision.
+
+Ans 2 
+ CAP Stands for 
+ "Consistancy -Every read receives the most recent write.", 
+ "Availability - Every request received by a functional node must result in a response.", and 
+ "Partition Tolerance - The distributed system should continue to operate despite communication breakages that separate the network into clusters which are unable to communicate with each other.".
+
+ CAP Theorem states that it is impossible for a system to offer more than two out of the three aspects mentioned above. While designing distributed systems, one has to choose between consistency and availability based on the business requirements.The resulting system isn’t entirely consistent or available — but a combination which is reasonable for specific business needs.
+
+ CAP Theorem are most commonly used in E-commerce Shopping Cart System, Flight Booking System, etc.
+
+<-------------------------------------------------------------------------------------------------------------------------------->
+
+Q3 What are SOLID principles? Explain with examples wherever possible.
+
+Ans3
+
+Solid Principle Stands for -
+
+"Single responsibility principle",
+"Open-Closed principle",
+"Liskov substitution principle",
+"Interface segregation principle", and
+"Dependency inversion principle".
+
+"Single responsibility principle" - One class should have one and only one responsibility, this is the main meaning behind SRP. We should write, change, and maintain a class only for one purpose. A class is like a container. We can add any amount of data, fields, and methods into it. However, if we try to achieve too much through a single class, soon that class will become bulky. If we follow SRP, the classes will become compact and neat where each class is responsible for a single problem, task, or concern.
+Example : 
+• Rectangle class with draw() and area()
+• Computational geometry now depends on GUI, via Rectangle.
+
+
+"Open-Closed principle" - Software components should be open for extension, but closed for modification this is the main meaning behind OCP. It means that the application classes should be designed in such a way that whenever fellow developers want to change the flow of control in specific conditions in application, all they need to extend the class and override some functions and that’s it.
+
+"Liskov substitution principle" - Derived types must be completely substitutable for their base types this is the main meaning behind LSP. LSP means that the classes, fellow developers created by extending our class, should be able to fit in application without failure. This is important when we resort to polymorphic behavior through inheritance.
+
+"Interface segregation principle" - Clients should not be forced to implement unnecessary methods which they will not use this is the main meaning behind ISP. Clients should not be forced to depend upon interfaces that they do not use. Avoid fat interfaces.Fat interfaces: interfaces of a class that can be broken down into groups that serve different set of clients. Clients depending on a subset of interfaces need to change when other clients using a different subset changes.
+
+"Dependency inversion principle" - Depend on abstractions, not on concretions this is the main meaning behind DIP.
+High level modules should not depend upon low level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions. DIP is an out-growth of OCP and LSP. Inversion”, because standard structured programming approaches make the higher level depend on lower level.
+
+
+
+    
+<-------------------------------------------------------------------------------------------------------------------------------->
+
+Q4 a) Which of the design principles: solid principles or clean code pattern is being violated in this scenario.
+
+b.) Rectify/fix it with the best practices and also demonstrate the corresponding pseudo code.
+
+protocol DataManager{
+    func read()
+    func write()
+}
+class DiskRealmManager:Data Manager{
+    func read(){
+        print("Reading DiskRealmManager")
+   }
+    func write(){
+        print("Saving Into Realm")
+    }
+}
+class DiskCoreData Manager:DataManager{
+   func read(){
+        print("Reading DiskRealmManager")
+   }
+    func write(){
+        print("Saving Into Realm")
+    }
+}
+class InMemory RealmManager:DataManager{
+    func read(){
+        print("Reading InMemory RealmManager")
+    }
+    func write(){
+        fatalError()
+    }
+}
+
+Ans 4 (a)
+
+In the above code snipate it is violat the  Interface segregation principle (ISP) . 
+Because in the above code  class InMemoryRealmManager conforming to an interface where some method is useless for this class.
+As shown above code we created a general-purpose interface DataManager and many classes conforming to it. There are some features that are not needed by some of the classes .
+So we need to break this into client-specific interfaces so that it should:
+ 1-Increased reusability,
+ 2-Follow LSP,
+ 3-Compose features that only required instead of getting unrelated things,
+
+Ans 4 (b)
+
+Following it’s the code supporting the Interface Segregation Principle. 
+By splitting the DataManger interface in 2 different interfaces(Readable, Writable) the new InMemoryRealmManager class is no longer forced to implement the write method. 
+Also, if we need another functionality for the robot-like fetching we create another interface Fetchable with a method fetch.
+
+
+protocol ReadDataManager{
+    func read()
+}
+protocol WriteDataManager{
+    func write()
+}
+class DiskRealmManager:ReadDataManager,WriteDataManager{
+   func read(){
+        print("Reading DiskRealmManager")
+   }
+    func write(){
+        print("Saving Into Realm")
+    }
+}
+class DiskCoreData Manager:ReadDataManager,WriteDataManager{
+    func read(){
+        print("Reading DiskRealmManager")
+   }
+    func write(){
+        print("Saving Into Realm")
+    }
+}
+class InMemory RealmManager:ReadDataManager{
+    func read(){
+        print("Reading DiskRealmManager")
+   }
+}
