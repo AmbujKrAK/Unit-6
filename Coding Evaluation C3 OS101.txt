@@ -1,0 +1,26 @@
+Q3.  What is the Singleton Design Pattern? Explain with an example and where can it be used? Also Explain eager and Lazy initialization.
+
+Ans 3.
+
+The singleton pattern is a design pattern that restricts the instantiation of a class to one object. 
+Various design options for implementing such a class could be, If you have a good handle on static class variables and access modifiers this should not be a difficult task.
+
+The singleton pattern is one of the simplest design patterns. Sometimes we need to have only one instance of our class for example a single Database connection shared by multiple objects as creating a separate Database connection for every object may be costly.
+Similarly, there can be a single configuration manager or error manager in an application that handles all problems instead of creating multiple managers.
+
+An exmaple for this can be - 
+
+We can created instance of singleton in static initializer. JVM(Java Virtual Machine) executes static initializer when the class is loaded and hence this is guaranteed to be thread safe. We can use this method only when your singleton class is light and is used throughout the execution of your program.
+
+- Static initializer based Java implementation of
+- singleton design pattern
+
+class Singleton{
+    private static Singleton obj = new Singleton();
+ 
+    private Singleton() {}
+ 
+    public static Singleton getInstance(){
+        return obj;
+    }
+}
