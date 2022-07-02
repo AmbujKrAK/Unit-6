@@ -1,3 +1,271 @@
+Q2.Design an online book reader system, that provides the following functionality:
+
+• Searching the database of books and reading a book.
+• User membership creation and extension.
+• Only one active user at a time and only one active book by this user.
+
+Ans 2.
+
+class e-boobreader {
+  public Library library;
+  public usermange usermange;
+  public Display display;
+  public Book activeBook;
+  public User activeUser;
+
+  public e-boobreader(){
+    usermange = new usermange();
+    library = new Library();
+    display = new Display();
+  }
+
+  public Library getLibrary(){
+    return library;
+  }
+
+  public usermange getusermange(){
+    return usermange;
+  }
+
+  public Display getDisplay(){
+    return display;
+  }
+
+  public Book getActiveBook(){
+    return activeBook;
+  }
+
+  public void setActiveBook(Book book){
+    activeBook = book;
+    display.displayBook(book);
+  }
+
+  public User getActiveUser(){
+    return activeUser;
+  }
+
+  public void setActiveUser(User user){
+    activeUser = user;
+    display.displayUser(user);
+  }
+}
+class Library {
+  public HashMap<Integer, Book> books;
+
+  public Library(){
+    books = new HashMap<Integer, Book>();
+  }
+
+  public Boolean addBook(int id, String details, String title){
+    if (books.containsKey(id)) {
+      return false;
+    }
+    Book book = new Book(id, details, title);
+    books.put(id, book);
+    return true;
+  }
+
+  public Boolean addBook(Book book){
+    if (books.containsKey(book.getId())) {
+      return false;
+    }
+
+    books.put(book.getId(), book);
+    return true;
+  }
+
+  public boolean remove(Book b){
+    return remove(b.getId());
+  }
+
+  public boolean remove(int id){
+    if (!books.containsKey(id)) {
+      return false;
+    }
+    books.remove(id);
+    return true;
+  }
+
+  public Book find(int id){
+    return books.get(id);
+  }
+}
+class usermange {
+  public HashMap<Integer, User> users;
+
+  public usermange(){
+    users = new HashMap<Integer, User>();
+  }
+  public Boolean addUser(int id, String details, String name){
+    if (users.containsKey(id)) {
+      return false;
+    }
+    User user = new User(id, details, name);
+    users.put(id, user);
+    return true;
+  }
+
+  public Boolean addUser(User user){
+    if (users.containsKey(user.getId())) {
+      return false;
+    }
+
+    users.put(user.getId(), user);
+    return true;
+  }
+
+  public boolean remove(User u){
+    return remove(u.getId());
+  }
+
+  public boolean remove(int id){
+    if (users.containsKey(id)) {
+      return false;
+    }
+    users.remove(id);
+    return true;
+  }
+
+  public User find(int id)
+  {
+    return users.get(id);
+  }
+}
+class Display {
+  public Book activeBook;
+  public User activeUser;
+  public int pageNumber = 0;
+
+  public void displayUser(User user){
+    activeUser = user;
+    refreshUsername();
+  }
+
+  public void displayBook(Book book){
+    pageNumber = 0;
+    activeBook = book;
+
+    refreshTitle();
+    refreshDetails();
+    refreshPage();
+  }
+
+  public void turnPageForward(){
+    pageNumber++;
+    System.out.println("Turning forward to page no " +
+        pageNumber + " of book having title " +
+                  activeBook.getTitle());
+    refreshPage();
+  }
+
+  public void turnPageBackward(){
+    pageNumber--;
+    System.out.println("Turning backward to page no " +
+          pageNumber + " of book having title " +
+                  activeBook.getTitle());
+    refreshPage();
+  }
+
+  public void refreshUsername(){
+    System.out.println("User name " + activeUser.getName() +
+        " is refreshed");
+  }
+
+  public void refreshTitle(){
+    System.out.println("Title of the book " +
+            activeBook.getTitle() + " refreshed");
+  }
+
+  public void refreshDetails(){
+    System.out.println("Details of the book " +
+            activeBook.getTitle() + " refreshed");
+  }
+
+  public void refreshPage(){
+    System.out.println("Page no " + pageNumber + " refreshed");
+  }
+}
+class Book {
+  public int bookId;
+  public String details;
+  public String title;
+
+public Book(int id, String details, String title){
+    bookId = id;
+    this.details = details;
+    this.title = title;
+  }
+
+  public int getId(){
+    return bookId;
+  }
+
+  public void setId(int id){
+    bookId = id;
+  }
+
+  public String getDetails(){
+    return details;
+  }
+
+  public void setDetails(String details){
+    this.details = details;
+  }
+
+  public String getTitle(){
+    return title;
+  }
+
+  public void setTitle(String title){
+    this.title = title;
+  }
+}
+class User {
+  public int userId;
+  public String name;
+  public String details;
+
+  public void renewMembership(){
+  }
+
+  public User(int id, String details, String name){
+    this.userId = id;
+    this.details = details;
+    this.name = name;
+  }
+
+  public int getId(){
+    return userId;
+  }
+
+  public void setId(int id){
+    userId = id;
+  }
+
+  public String getDetails(){
+    return details;
+  }
+
+  public void setDetails(String details){
+    this.details = details;
+  }
+
+  public String getName(){
+    return name;
+  }
+
+  public void setName(String name){
+    this.name = name;
+  }
+}
+
+
+
+<------------------------------------------------------------------------------------------------------------------------>
+
+
+
+
 Q3.  What is the Singleton Design Pattern? Explain with an example and where can it be used? Also Explain eager and Lazy initialization.
 
 Ans 3.
