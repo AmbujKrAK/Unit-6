@@ -1,6 +1,11 @@
-const express = require('express');
+import express from 'express'
+import authController from './controller/auth.Controller.js'
+import usercontroller from './controller/user.Controller.js'
 
-const app = express();
-app.use(express.json());
+const app = express()
+app.use(express.json())
 
-module.exports = app;
+app.use('/', authController)
+app.use('/user', usercontroller)
+
+export default app
