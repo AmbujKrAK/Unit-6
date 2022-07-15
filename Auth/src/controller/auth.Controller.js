@@ -1,8 +1,10 @@
-import express from 'express'
+// import express from 'express'
 import data from '../model/readfile.js'
 import pushdata from '../model/writefile.js'
 import sha256 from 'sha256'
 const router = express.Router()
+// import http from "../server";
+const url = req.url;
 
 // Post
 

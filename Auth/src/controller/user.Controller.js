@@ -4,7 +4,9 @@ import pushdata from '../model/writefile.js'
 import sha256 from 'sha256'
 import deleteData from '../model/deleteFile.js'
 import updatedata from '../model/updatefile.js'
-const router = express.Router()
+// const router = express.Router()
+
+const router = req.router;
 
 // To get all data 
 
